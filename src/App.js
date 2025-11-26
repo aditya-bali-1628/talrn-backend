@@ -8,10 +8,10 @@ import DeveloperList from "./components/DeveloperList";
 function App() {
   const [developers, setDevelopers] = useState([]);
   const [filter, setFilter] = useState("");
-
+const API_URL = "https://talrn-frontend-production.up.railway.app"; // your live backend URL
   const fetchDevelopers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/developers");
+      const res = await axios.get(`${API_URL}/developers`);
       setDevelopers(res.data);
     } catch {
       toast.error("Error fetching developers");
@@ -24,7 +24,7 @@ function App() {
 
   const handleAdd = async (data) => {
     try {
-      await axios.post("http://localhost:5000/developers", data);
+      await axios.post(`${API_URL}/developers`, data);
       toast.success("Developer added!");
       fetchDevelopers();
     } catch {
